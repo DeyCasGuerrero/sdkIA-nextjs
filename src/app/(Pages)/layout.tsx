@@ -1,9 +1,9 @@
 
 import type { Metadata } from "next";
-import { Roboto } from "next/font/google";
-import "./globals.css";
+import { Inter } from "next/font/google";
+import "../globals.css";
 
-const inter = Roboto({ subsets: ["latin"], weight:["400"] });
+const inter = Inter({ subsets: ["latin"], weight:["400"] });
 
 export const metadata: Metadata = {
   title: "MIAya",
@@ -16,7 +16,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="scroll-smooth">
+    <html lang="en">
       <body className={inter.className}>
         {children}
       </body>

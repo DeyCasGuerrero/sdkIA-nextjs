@@ -1,5 +1,4 @@
-
-import { Nav, Slogan, SectionInformation, SectionModel } from '@/features/shared/index';
+import { Nav, Slogan, SectionInformation, SectionModel, Footer } from '@/features/shared/index';
 export default function Home() {
   return (
     <main className="flex min-h-screen flex-col overflow-hidden">
@@ -7,6 +6,7 @@ export default function Home() {
       <Slogan />
       <SectionInformation />
       <SectionModel/>
+      <Footer/>
     </main>
   );
 }

@@ -8,6 +8,7 @@ function SectionModel() {
 
     return (
         <section
+            id="model"
             className="relative w-full  te h-screen flex flex-col gap-20 items-center justify-center text-white overflow-hidden bg-black">
             {isInView &&
                 <motion.div

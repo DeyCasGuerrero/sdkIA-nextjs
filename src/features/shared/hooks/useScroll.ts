@@ -7,10 +7,11 @@ export function ScrollFuntion (){
 
     const handleScroll=()=>{
         const scrolling= window.scrollY;
-        if(scrolling < 100){
-            setScroll(true);
+        
+        if(scrolling <100){
+            setScroll(false);
         }else{
-            setScroll(false)
+            setScroll(true)
         }
     }
 
@@ -22,23 +23,6 @@ export function ScrollFuntion (){
         }
 
     },[])
-
-    // useEffect(() => {
-    //     const handleScroll = () => {
-          
-    //     };
-
-    //     const smoothScroll = () => {
-           
-    //     };
-
-    //     window.addEventListener('scroll', handleScroll);
-
-    //     // Cleanup function to remove the event listener when the component unmounts
-    //     return () => {
-    //         window.removeEventListener('scroll', handleScroll);
-    //     };
-    // }, []);
 
     return {scroll};
 };
