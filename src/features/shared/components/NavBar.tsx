@@ -5,7 +5,10 @@ import { RiLoginBoxFill } from "react-icons/ri";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { useSession, signOut } from "next-auth/react";
 export default function NavBar() {
+
+    const { data: session, status } = useSession()
 
     const [isClick, setIsClick] = useState<boolean>(false);
 
@@ -51,8 +54,24 @@ export default function NavBar() {
                             <li><a href="#model" className="text-white">Model</a></li>
                             <li><a href="#intro" className="text-white">Introduction</a></li>
                             <div className="flex items-center bg-yellow-100 text-black p-2 rounded-lg">
-                                <Link href="/login" className=" hover:text-blue-300">Sign in</Link>
-                                <RiLoginBoxFill color="black" size={30} />
+                                {session?.user ? (
+                                    <div className="flex flex-col items-center">
+                                        <div className="flex items-center bg-black text-white p-2 rounded-lg">
+                                            <h1 className="">{session.user.name}</h1>
+                                        </div>
+                                        <div>
+                                            <button onClick={()=>signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl
+                                                transition duration-300 ease-in-out transform hover:scale-105">
+                                                LogOut
+                                            </button>
+                                        </div>
+                                    </div>
+                                ) : (
+                                    <div className="flex items-center bg-black text-white p-2 rounded-lg">
+                                        <Link href="/login" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Iniciar sesión</Link>
+                                        <RiLoginBoxFill color="white" size={30} className="ml-2" />
+                                    </div>
+                                )}
                             </div>
                         </ul>
 
@@ -67,11 +86,26 @@ export default function NavBar() {
                     <Link href="#model" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Modelo</Link>
                     <Link href="#intro" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Introducción</Link>
                 </div>
+                
+                {session?.user ? (
+                    <>
+                        <div className="flex items-center bg-black text-white p-2 rounded-lg">
+                            <h1 className="">{session.user.name}</h1>
+                        </div>
+                        <div>
+                            <button className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl transition duration-300 ease-in-out transform hover:scale-105">LogOut</button>
+                        </div>
+                    </>
 
-                <div className="flex items-center bg-black text-white p-2 rounded-lg">
-                    <Link href="/login" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Iniciar sesión</Link>
-                    <RiLoginBoxFill color="white" size={30} className="ml-2" />
-                </div>
+                ) : (
+                    <div className="flex items-center bg-black text-white p-2 rounded-lg">
+                        <Link href="/login" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Iniciar sesión</Link>
+                        <RiLoginBoxFill color="white" size={30} className="ml-2" />
+                    </div>
+                )}
+
+
+
             </div>
 
         </nav>

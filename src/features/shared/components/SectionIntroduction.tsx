@@ -26,7 +26,7 @@ export default function IntroductionSection() {
         }
 
         return () => clearTimeout(timeout);
-    }, [animationComplete]);
+    }, [animationComplete, texts.length]);
 
     const container = {
         hidden: { opacity: 1 },
@@ -47,7 +47,7 @@ export default function IntroductionSection() {
 
 
     return (
-        <section className="bg-gray-100 font-mono p-4 lg:p-20 w-full h-[30rem] flex lg:flex-row lg:justify-between lg:items-center" id="intro">
+        <section className="bg-gray-100 overflow-hidden font-mono p-4 lg:p-20 w-full h-[35rem] flex lg:flex-row lg:justify-between lg:items-center" id="intro">
             {isInView &&
                 <motion.div
                     initial={{ opacity: 0, x: -300 }}
@@ -93,12 +93,12 @@ export default function IntroductionSection() {
                                     onAnimationComplete={() => setAnimationComplete(true)}
 
                                 >
-                                    {texts[currentTextIndex].split("").map((char, index) => (
+                                    {texts[currentTextIndex].split("").map((letter, index) => (
                                         <motion.span
                                             key={index}
                                             className="tracking-widest"
                                             variants={child}>
-                                            {char}
+                                            {letter}
                                         </motion.span>
                                     ))}
                                 </motion.div>

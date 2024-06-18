@@ -9,8 +9,7 @@ import Link from "next/link";
 
 function MainSections() {
     const { scroll } = ScrollFuntion();
-
-    console.log(scroll)
+    
     return (
         <section className="text-2xl w-full h-screen relative overflow-hidden" id="main">
             <div className="h-full relative">
@@ -29,6 +28,7 @@ function MainSections() {
                         alt="img"
                         width={500}
                         height={300}
+                        priority={false}
                         style={{
                             width: '100%',
                             height: '100%',
