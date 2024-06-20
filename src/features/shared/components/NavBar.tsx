@@ -60,7 +60,7 @@ export default function NavBar() {
                                             <h1 className="">{session.user.name}</h1>
                                         </div>
                                         <div>
-                                            <button onClick={()=>signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl
+                                            <button onClick={() => signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl
                                                 transition duration-300 ease-in-out transform hover:scale-105">
                                                 LogOut
                                             </button>
@@ -86,14 +86,17 @@ export default function NavBar() {
                     <Link href="#model" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Modelo</Link>
                     <Link href="#intro" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Introducción</Link>
                 </div>
-                
+
                 {session?.user ? (
                     <>
                         <div className="flex items-center bg-black text-white p-2 rounded-lg">
                             <h1 className="">{session.user.name}</h1>
                         </div>
                         <div>
-                            <button className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl transition duration-300 ease-in-out transform hover:scale-105">LogOut</button>
+                            <button onClick={()=>signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl 
+                                transition duration-300 ease-in-out transform hover:scale-105">
+                                LogOut
+                            </button>
                         </div>
                     </>
 

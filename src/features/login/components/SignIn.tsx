@@ -1,10 +1,36 @@
 'use client';
+import { ChangeEvent, useState } from "react";
 import GoogleSvg from "../../register/icons/GoogleSvg";
-import {handleGoogleSignIn} from "../hooks/useAuth";
+import { handleGoogleSignIn } from "../hooks/useAuth";
+import { User } from "../types/LoginTypes";
 function LoginComponent() {
+    
+
+    const [dataLogin, setdataLogin] = useState<User>({
+        username: '',
+        password: '',
+    });
+
+    const handleOnChange = (e:ChangeEvent<HTMLInputElement>)=>{
+        const {name , value}=e.target;
+
+        setdataLogin(prevState=>({
+            ...prevState,
+            [name]: value
+        }));
+
+        
+    }
+
+
+    const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+        console.log(dataLogin);
+    }
+
     return (
 
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+        <form onSubmit={handleSumit} className="relative py-3 sm:max-w-xl sm:mx-auto">
             <div
                 className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10"
             >
@@ -20,8 +46,10 @@ function LoginComponent() {
                         </label>
                         <input
                             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
-                            type="text"
+                            type="email"
+                            name="username"
                             id="login"
+                            onChange={handleOnChange}
                         />
                         <label
                             className="font-semibold text-sm text-gray-600 pb-1 block"
@@ -29,7 +57,9 @@ function LoginComponent() {
                         <input
                             className="border rounded-lg px-3 py-2 mt-1 mb-5 text-sm w-full"
                             type="password"
+                            name="password"
                             id="password"
+                            onChange={handleOnChange}
                         />
                     </div>
                     <div className="text-right mb-4">
@@ -70,7 +100,7 @@ function LoginComponent() {
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
 
     )
 }

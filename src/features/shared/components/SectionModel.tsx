@@ -2,6 +2,7 @@
 import { motion, useInView, AnimatePresence } from "framer-motion";
 import { useRef } from "react";
 import { ScrollFuntion } from "../hooks/useScroll";
+import Link from "next/link";
 function SectionModel() {
     const ref = useRef(null);
     const isInView = useInView(ref, { once: true });
@@ -13,7 +14,7 @@ function SectionModel() {
             {isInView &&
                 <motion.div
                     initial={{ backgroundColor: 'white', x: '100%' }}
-                    animate={{ backgroundColor: 'blue' , x: 0 }}
+                    animate={{ backgroundColor: 'blue', x: 0 }}
                     transition={{ duration: 1, delay: 1, ease: 'easeOut' }}
                     className="bg-black absolute w-full  te h-screen flex flex-col gap-20 items-center justify-center">
 
@@ -55,7 +56,9 @@ function SectionModel() {
                             ease: "easeIn",
                         }}
                         className="bg-green-500 p-2 underline font-mono text-xl uppercase hover:animate-pulse z-10">
-                        entry the model
+                        <Link href={"/model"}>
+                            entry the model
+                        </Link>
                     </motion.button>
                 }
             </AnimatePresence>
