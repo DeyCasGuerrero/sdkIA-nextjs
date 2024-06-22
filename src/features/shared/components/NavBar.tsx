@@ -88,12 +88,13 @@ export default function NavBar() {
                 </div>
 
                 {session?.user ? (
+
                     <>
                         <div className="flex items-center bg-black text-white p-2 rounded-lg">
                             <h1 className="">{session.user.name}</h1>
                         </div>
                         <div>
-                            <button onClick={()=>signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl 
+                            <button onClick={() => signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl 
                                 transition duration-300 ease-in-out transform hover:scale-105">
                                 LogOut
                             </button>

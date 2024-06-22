@@ -4,11 +4,10 @@ export function useAuth(){
     const{data:session, status}=useSession();
 }
 
-
 export const handleGoogleSignIn = async () => {
     const result = await signIn('google', {
         redirect: true,
-        callbackUrl: '/',
+        callbackUrl: '/login',
     });
 
     if (result?.error) {

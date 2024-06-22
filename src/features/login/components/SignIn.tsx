@@ -1,31 +1,64 @@
 'use client';
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
 import GoogleSvg from "../../register/icons/GoogleSvg";
 import { handleGoogleSignIn } from "../hooks/useAuth";
+import { SignInResponse, signIn, useSession } from "next-auth/react";
 import { User } from "../types/LoginTypes";
+import { Loader } from "../../shared/index";
 function LoginComponent() {
-    
+
+    const { data: session, status } = useSession();
+
+    console.log({ session, status });
+
+
 
     const [dataLogin, setdataLogin] = useState<User>({
         username: '',
         password: '',
     });
 
-    const handleOnChange = (e:ChangeEvent<HTMLInputElement>)=>{
-        const {name , value}=e.target;
+    if (status === "loading") {
+        return <Loader></Loader>
+    }
 
-        setdataLogin(prevState=>({
+    const handleOnChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const { name, value } = e.target;
+
+        setdataLogin(prevState => ({
             ...prevState,
             [name]: value
         }));
 
-        
+
     }
 
 
-    const handleSumit = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleSumit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log(dataLogin);
+
+        if (!dataLogin.password && !dataLogin.password) {
+
+            return;
+        }
+
+        try {
+            const result: SignInResponse | undefined = await signIn('credentials', {
+                redirect: false,
+                username: dataLogin.username,
+                password: dataLogin.password,
+            });
+
+            if (!result) {
+                throw new Error('No result received');
+            }
+
+
+
+        } catch (error) {
+            console.error('Error during login:', error);
+        }
+
     }
 
     return (

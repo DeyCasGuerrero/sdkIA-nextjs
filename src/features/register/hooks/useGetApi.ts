@@ -7,7 +7,7 @@ export function usePostRegister() {
 
     const signUp = async (data: User) => {
         try {
-            const response = await fetch(`${process.env.NEXT_PUBLIC_APIRES_URL}${process.env.NEXT_PUBLIC_ENDPOINTREGISTER}`, {
+            const response = await fetch(`${process.env.NEXT_PUBLIC_APIRES_URL}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
