@@ -5,13 +5,20 @@ import { handleGoogleSignIn } from "../hooks/useAuth";
 import { SignInResponse, signIn, useSession } from "next-auth/react";
 import { User } from "../types/LoginTypes";
 import { Loader } from "../../shared/index";
+import { useRouter } from "next/navigation";
 function LoginComponent() {
 
     const { data: session, status } = useSession();
 
+    const router = useRouter();
+
+    useEffect(() => {
+        if (status === "authenticated"){
+            router.push('/');
+        }
+    }, [status]);
+
     console.log({ session, status });
-
-
 
     const [dataLogin, setdataLogin] = useState<User>({
         username: '',
@@ -33,12 +40,11 @@ function LoginComponent() {
 
     }
 
-
     const handleSumit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!dataLogin.password && !dataLogin.password) {
-
+            console.error('Username or password missing');
             return;
         }
 
@@ -53,12 +59,11 @@ function LoginComponent() {
                 throw new Error('No result received');
             }
 
-
+            console.log('Login successful:', result);
 
         } catch (error) {
             console.error('Error during login:', error);
         }
-
     }
 
     return (

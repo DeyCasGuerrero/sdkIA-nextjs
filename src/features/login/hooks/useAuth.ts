@@ -7,7 +7,7 @@ export function useAuth(){
 export const handleGoogleSignIn = async () => {
     const result = await signIn('google', {
         redirect: true,
-        callbackUrl: '/login',
+        callbackUrl: '/',
     });
 
     if (result?.error) {

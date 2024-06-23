@@ -18,7 +18,7 @@ export default function NavBar() {
 
     return (
 
-        <nav className="sm:shadow-2xl w-full p-2 flex items-center justify-between absolute sm:w-11/12 z-40 sm:inset-x-0 sm:mx-auto sm:top-10 sm:rounded-full overflow-hidden">
+        <nav className="sm:shadow-2xl bg-white w-full p-2 flex items-center justify-between absolute sm:w-11/12 z-40 sm:inset-x-0 sm:mx-auto sm:top-10 sm:rounded-full overflow-hidden">
             <div className="flex items-center gap-5">
                 <Image src="/IA.jpg" width={60} height={60} alt="logo" className="rounded-full border-white border-2" />
                 <div className="bg-white p-2 rounded-lg">
@@ -32,6 +32,8 @@ export default function NavBar() {
                 </button>
             </div>
 
+            {/*Mobiles*/}
+
             <AnimatePresence>
                 {isClick && (
                     <motion.div
@@ -43,7 +45,7 @@ export default function NavBar() {
                             duration: 0.3,
                             ease: "easeOut",
                         }}
-                        className="fixed inset-0 bg-black z-50 flex flex-col items-start gap-4 p-2 sm:hidden"
+                        className="fixed inset-0 bg-black z-50 flex flex-col items-start gap-4 p-2 sm:hidden overflow-y-auto"
                     >
                         <button onClick={handleClick}>
                             <AiOutlineClose className="text-white" size={30} />
@@ -57,7 +59,21 @@ export default function NavBar() {
                                 {session?.user ? (
                                     <div className="flex flex-col items-center">
                                         <div className="flex items-center bg-black text-white p-2 rounded-lg">
-                                            <h1 className="">{session.user.name}</h1>
+                                            {session?.user.name ? (
+                                                <h1>
+                                                    {session.user.name}
+                                                </h1>
+
+                                            ) : (
+                                                <h1>{session.user?.firstname}</h1>
+                                            )}
+                                        </div>
+                                        <div>
+                                            <img
+                                                src={session.user.image !== null ? session.user.image : undefined}
+                                                alt="perfile"
+                                                className="w-20 h-20 rounded-full cursor-pointer  hover:shadow-md hover:scale-110 transition duration-300 focus:outline-none"
+                                            />
                                         </div>
                                         <div>
                                             <button onClick={() => signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl
@@ -79,6 +95,8 @@ export default function NavBar() {
                 )}
             </AnimatePresence>
 
+            {/*Pc, laptops or more*/}
+
             <div className="hidden text-black sm:flex items-center justify-around h-10 gap-4 tracking-wider mr-10">
                 <div className="flex justify-between w-96 font-semibold">
                     <Link href="#main" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Inicio</Link>
@@ -87,29 +105,52 @@ export default function NavBar() {
                     <Link href="#intro" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Introducción</Link>
                 </div>
 
-                {session?.user ? (
+                <>
+                    {status === 'loading' ? (
+                        <p className="text-xl rounded-xl font-semibold bg-black p-2 text-white">Loading...</p>
+                    ) : (
+                        <>
+                            {session?.user ? (
+                                <>
+                                    <div className="flex items-center bg-black text-white p-2 rounded-lg">
+                                        {session?.user.name ? (
+                                            <h1>
+                                                {session.user.name}
+                                            </h1>
 
-                    <>
-                        <div className="flex items-center bg-black text-white p-2 rounded-lg">
-                            <h1 className="">{session.user.name}</h1>
-                        </div>
-                        <div>
-                            <button onClick={() => signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl 
+                                        ) : (
+                                            <h1>{session.user?.firstname}</h1>
+                                        )}
+                                    </div>
+                                    <>
+                                        {session?.user.image?(
+                                            <img
+                                                src={session.user.image}
+                                                alt="perfile"
+                                                className="w-16 h-16 rounded-full cursor-pointer  hover:shadow-md hover:scale-110 transition duration-300 focus:outline-none"
+                                            />
+
+                                        ):(
+                                            <p></p>
+                                        )}
+                                    </>
+                                    <div>
+                                        <button onClick={() => signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl 
                                 transition duration-300 ease-in-out transform hover:scale-105">
-                                LogOut
-                            </button>
-                        </div>
-                    </>
+                                            LogOut
+                                        </button>
+                                    </div>
+                                </>
+                            ) : (
+                                <div className="flex items-center bg-black text-white p-2 rounded-lg">
+                                    <Link href="/login" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Iniciar sesión</Link>
+                                    <RiLoginBoxFill color="white" size={30} className="ml-2" />
+                                </div>
+                            )}
 
-                ) : (
-                    <div className="flex items-center bg-black text-white p-2 rounded-lg">
-                        <Link href="/login" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Iniciar sesión</Link>
-                        <RiLoginBoxFill color="white" size={30} className="ml-2" />
-                    </div>
-                )}
-
-
-
+                        </>
+                    )}
+                </>
             </div>
 
         </nav>
