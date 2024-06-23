@@ -8,6 +8,7 @@ const nextConfig = {
                 port: '',               // El puerto se deja vacío para usar el puerto por defecto (443 para HTTPS).
                 pathname: '/f/274239/**', // Permite cualquier subruta dentro de '/f/274239/'.
             },
+            
 
         ],
     },

@@ -14,7 +14,7 @@ export async function middleware(req: NextRequest) {
     }
 
     // Si el usuario no está autenticado y trata de acceder a rutas protegidas, redirigir a la página de inicio de sesión
-    if (!token && pathname === '/model') {
+    if (!token && (pathname === '/model' || pathname === '/miaya')) {
         return NextResponse.redirect(new URL('/login', req.url));
     }
 
@@ -28,6 +28,7 @@ export const config = {
         '/login',
         '/register',
         '/model',
+        '/miaya',
     ],
 };
 

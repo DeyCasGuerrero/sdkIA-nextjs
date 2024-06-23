@@ -6,11 +6,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
+import { ScrollFuntion } from "../hooks/useScroll";
 export default function NavBar() {
 
     const { data: session, status } = useSession()
 
     const [isClick, setIsClick] = useState<boolean>(false);
+
+    const {scroll}=ScrollFuntion();
 
     const handleClick = () => {
         setIsClick(!isClick);
@@ -18,7 +21,7 @@ export default function NavBar() {
 
     return (
 
-        <nav className="sm:shadow-2xl bg-white w-full p-2 flex items-center justify-between absolute sm:w-11/12 z-40 sm:inset-x-0 sm:mx-auto sm:top-10 sm:rounded-full overflow-hidden">
+        <nav className={`sm:shadow-2xl bg-white w-full p-2 flex items-center justify-between absolute sm:w-11/12 z-40 sm:inset-x-0 sm:mx-auto sm:top-10 sm:rounded-full overflow-hidden ${scroll? 'stinky blur-3xl':''}`}>
             <div className="flex items-center gap-5">
                 <Image src="/IA.jpg" width={60} height={60} alt="logo" className="rounded-full border-white border-2" />
                 <div className="bg-white p-2 rounded-lg">
@@ -39,11 +42,11 @@ export default function NavBar() {
                     <motion.div
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
-                        exit={{ opacity: 0, x: -300 }}
+                        exit={{ x: -300 }}
                         transition={{
                             delay: 0.2,
                             duration: 0.3,
-                            ease: "easeOut",
+                            ease: "easeIn",
                         }}
                         className="fixed inset-0 bg-black z-50 flex flex-col items-start gap-4 p-2 sm:hidden overflow-y-auto"
                     >
@@ -51,7 +54,7 @@ export default function NavBar() {
                             <AiOutlineClose className="text-white" size={30} />
                         </button>
                         <ul className="flex flex-col text-3xl justify-center items-center w-full h-full gap-20 p-2 tracking-wider font-mono">
-                            <li><a href="#main" className="text-white">Inicio</a></li>
+                            <li><a href="/" className="text-white">Inicio</a></li>
                             <li><a href="#" className="text-white">Contact</a></li>
                             <li><a href="#model" className="text-white">Model</a></li>
                             <li><a href="#intro" className="text-white">Introduction</a></li>
@@ -99,7 +102,7 @@ export default function NavBar() {
 
             <div className="hidden text-black sm:flex items-center justify-around h-10 gap-4 tracking-wider mr-10">
                 <div className="flex justify-between w-96 font-semibold">
-                    <Link href="#main" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Inicio</Link>
+                    <Link href="/" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Inicio</Link>
                     <Link href="#" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Contacto</Link>
                     <Link href="#model" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Modelo</Link>
                     <Link href="#intro" className="hover:text-blue-300 transition duration-300 ease-in-out transform hover:scale-105">Introducción</Link>
@@ -136,7 +139,7 @@ export default function NavBar() {
                                     </>
                                     <div>
                                         <button onClick={() => signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl 
-                                transition duration-300 ease-in-out transform hover:scale-105">
+                                            transition duration-300 ease-in-out transform hover:scale-105">
                                             LogOut
                                         </button>
                                     </div>

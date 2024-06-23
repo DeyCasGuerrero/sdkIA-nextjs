@@ -1,0 +1,19 @@
+/* Section.module.css */
+.backGround {
+    position: relative;
+    overflow: hidden;
+}
+
+.backGround::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('https://a.storyblok.com/f/274239/3840x2160/6797297162/a1-neuro-hero.jpg/m/1000x563/filters:format(webp)') no-repeat center center;
+    background-size: cover;
+    filter: brightness(90%);
+    z-index: -1;
+    box-shadow: inset 0 0 100px 200px rgba(0, 0, 0, 0.5); 
+}
