@@ -10,7 +10,7 @@ function SectionModel() {
     return (
         <section
             id="model"
-            className="relative w-full p-20 h-screen flex flex-col gap-20 items-center justify-center text-white overflow-hidden bg-black">
+            className="relative w-full lg:p-20 h-screen flex flex-col gap-20 items-center justify-center text-white overflow-hidden bg-black">
             {isInView &&
                 <motion.div
                     initial={{ backgroundColor: 'white', x: '100%' }}

@@ -1,9 +1,11 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { User } from "../types/RegisterTypes";
+import { useRouter } from "next/navigation";
 
 export function usePostRegister() {
 
     const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
+    const router = useRouter();
 
     const signUp = async (data: User) => {
         try {
@@ -30,6 +32,12 @@ export function usePostRegister() {
 
     }
 
+    useEffect(() => {
+        if (isSignedIn) {
+            alert("You have successfully registered");
+            router.push("/login");
+        }
+    }, [isSignedIn, router]);
 
     return {
         isSignedIn,

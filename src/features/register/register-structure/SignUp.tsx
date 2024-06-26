@@ -1,14 +1,11 @@
 'use client'
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import GoogleSvg from "../icons/GoogleSvg";
 import { User } from "../types/RegisterTypes";
 import { usePostRegister } from "../hooks/useGetApi";
-import { useRouter } from "next/navigation";
 function RegisterComponent() {
     
-    const { isSignedIn,signUp }=usePostRegister();
-
-    const router = useRouter();
+    const { signUp }=usePostRegister();
 
     const [registerData, setRegisterData] = useState<User>({
         username: "",
@@ -36,10 +33,6 @@ function RegisterComponent() {
 
         try {
             await signUp(registerData);
-            if(isSignedIn){
-                alert("You have successfully registered");
-                router.push("/login");
-            }
         } catch (error) {
             console.error('Error al registrar usuario:', error);
         }
@@ -48,7 +41,7 @@ function RegisterComponent() {
     return (
 
         <form onSubmit={handleSumit}
-            className="relative w-full px-4 md:w-auto py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl "
+            className="relative w-full px-4 md:w-auto py-10 bg-white mx-8 md:mx-0 shadow-xl rounded-3xl "
         >
             <div className="max-w-md mx-auto">
                 <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-5">

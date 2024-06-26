@@ -80,7 +80,7 @@ export default function IntroductionSection() {
                         {isInView && (
                             <AnimatePresence>
                                 <motion.div
-                                    key={currentTextIndex}// Añadir key para forzar la remontaje de los elementos
+                                    key={currentTextIndex}// añadir key para forzar la remontaje de los elementos
                                     variants={container}
                                     initial="hidden"
                                     animate="visible"

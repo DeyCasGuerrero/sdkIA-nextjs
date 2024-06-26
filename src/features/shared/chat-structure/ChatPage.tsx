@@ -5,9 +5,8 @@ import { useSession } from "next-auth/react";
 
 function ChatPage() {
 
-    const { data: session, status } = useSession()
+    const { data: session } = useSession()
 
-    console.log(session);
     const { handleInputChange, handleSubmit, messages, input } = useChat({
         api: 'api/chat',
     });

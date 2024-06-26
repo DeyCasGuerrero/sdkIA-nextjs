@@ -6,18 +6,22 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { useSession, signOut } from "next-auth/react";
-import { ScrollFuntion } from "../hooks/useScroll";
-export default function NavBar() {
+
+
+interface NavProps {
+    url: string[];
+}
+
+export default function NavBar({ url }: NavProps) {
 
     const { data: session, status } = useSession()
 
     const [isClick, setIsClick] = useState<boolean>(false);
 
-    const {scroll} = ScrollFuntion();
-
     const handleClick = () => {
         setIsClick(!isClick);
     }
+
 
     return (
 
@@ -54,12 +58,12 @@ export default function NavBar() {
                             <AiOutlineClose className="text-white" size={30} />
                         </button>
                         <ul className="flex flex-col text-3xl justify-center items-center w-full h-full gap-20 p-2 tracking-wider font-mono">
-                            <li><Link href="/" className="text-white">Inicio</Link></li>
-                            <li><Link href="#model" className="text-white">Model</Link></li>
-                            <li><Link href="#intro" className="text-white">Introduction</Link></li>
-                            <div className="flex items-center bg-yellow-100 text-black p-2 rounded-lg">
+                            <li><Link href={url[0]} className="text-white">Home</Link></li>
+                            <li><Link href={url[1]} className="text-white">Model</Link></li>
+                            <li><Link href={url[2]} className="text-white">Introduction</Link></li>
+                            <div className="flex items-center bg-slate-800 text-black p-2 rounded-lg">
                                 {session?.user ? (
-                                    <div className="flex flex-col items-center">
+                                    <div className="flex flex-col items-center gap-2">
                                         <div className="flex items-center bg-black text-white p-2 rounded-lg">
                                             {session?.user.name ? (
                                                 <h1>
@@ -67,15 +71,21 @@ export default function NavBar() {
                                                 </h1>
 
                                             ) : (
-                                                <h1>{session.user?.firstname}</h1>
+                                                <Link href={"/profile"} className="hover:underline hover:text-yellow-300">{session.user?.firstname}</Link>
                                             )}
                                         </div>
                                         <div>
-                                            <img
-                                                src={session.user.image !== null ? session.user.image : undefined}
-                                                alt="perfile"
-                                                className="w-20 h-20 rounded-full cursor-pointer  hover:shadow-md hover:scale-110 transition duration-300 focus:outline-none"
-                                            />
+                                            {session.user.image ? (
+                                                <Link href={"/profile"}>
+                                                    <img
+                                                        src={session.user.image}
+                                                        alt="perfile"
+                                                        className="w-20 h-20 rounded-full cursor-pointer  hover:shadow-md hover:scale-110 transition duration-300 focus:outline-none"
+                                                    />
+                                                </Link>
+                                            ) : (
+                                                <div></div>
+                                            )}
                                         </div>
                                         <div>
                                             <button onClick={() => signOut()} className="hover:text-white bg-red-500 p-2 font-semibold rounded-xl
@@ -101,9 +111,9 @@ export default function NavBar() {
 
             <div className="hidden text-black sm:flex items-center justify-around h-10 gap-4 tracking-wider mr-10">
                 <div className="flex justify-between w-96 font-semibold">
-                    <Link href="/" className="transition duration-300 ease-in-out transform hover:scale-105">Inicio</Link>
-                    <Link href="#model" className="transition duration-300 ease-in-out transform hover:scale-105">Modelo</Link>
-                    <Link href="#intro" className="transition duration-300 ease-in-out transform hover:scale-105">Introducción</Link>
+                    <Link href={url[0]} className="transition duration-300 ease-in-out transform hover:scale-105">Home</Link>
+                    <Link href={url[1]} className="transition duration-300 ease-in-out transform hover:scale-105">Model</Link>
+                    <Link href={url[2]} className="transition duration-300 ease-in-out transform hover:scale-105">Introduction</Link>
                 </div>
 
                 <>
@@ -120,11 +130,11 @@ export default function NavBar() {
                                             </h1>
 
                                         ) : (
-                                            <h1>{session.user?.firstname}</h1>
+                                            <Link href={"/profile"} className="hover:underline hover:text-yellow-300">{session.user?.firstname}</Link>
                                         )}
                                     </div>
                                     <>
-                                        {session?.user.image?(
+                                        {session?.user.image ? (
                                             <Link href={"/profile"}>
                                                 <img
                                                     src={session.user.image}
@@ -133,7 +143,7 @@ export default function NavBar() {
                                                 />
                                             </Link>
 
-                                        ):(
+                                        ) : (
                                             <p></p>
                                         )}
                                     </>

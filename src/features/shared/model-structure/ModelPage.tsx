@@ -4,6 +4,7 @@ import { AiFillOpenAI } from "react-icons/ai";
 import styles from '../styles/home.module.css'
 import { useGetDataNew } from "../hooks/useGetNews";
 import { NewType } from "../types/ApiTypes";
+import ScrollButton from "../components/ScrollComponents";
 export default function ModelPage() {
 
     const news: NewType[] = useGetDataNew();
@@ -36,7 +37,7 @@ export default function ModelPage() {
                 </div>
             </section>
 
-            <section className="bg-[#161719] relative min-h-screen lg:p-20">
+            <section className="bg-[#161719] relative min-h-screen p-4 lg:p-20">
                 <div className="text-2xl font-semibold uppercase text-white">
                     Recent MIAya News
                 </div>
@@ -75,6 +76,7 @@ export default function ModelPage() {
 
             </section>
 
+            <ScrollButton url="/model" bgcolor="bg-green-600"/>
 
         </>
 

@@ -6,3 +6,4 @@ export { default as Footer} from './index-structure/Footer';
 export { default as Loader} from './index-structure/Loaging';
 export {default as StructureModelPage} from './model-structure/ModelPage';
 export {default as ChatPage } from './chat-structure/ChatPage';
+export {default as PerfileStructurePage} from './perfile-structure/Perfile-structure';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { RiGithubFill, RiTwitterFill, RiLinkedinBoxFill } from 'react-icons/ri';
 
 function Footer() {

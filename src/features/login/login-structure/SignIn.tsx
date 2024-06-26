@@ -18,8 +18,6 @@ function LoginComponent() {
         }
     }, [status]);
 
-    console.log({ session, status });
-
     const [dataLogin, setdataLogin] = useState<User>({
         username: '',
         password: '',
@@ -44,7 +42,7 @@ function LoginComponent() {
         e.preventDefault();
 
         if (!dataLogin.password && !dataLogin.password) {
-            console.error('Username or password missing');
+            alert('Username or password missing');
             return;
         }
 
@@ -59,8 +57,6 @@ function LoginComponent() {
                 throw new Error('No result received');
             }
 
-            console.log('Login successful:', result);
-
         } catch (error) {
             console.error('Error during login:', error);
         }
@@ -70,7 +66,7 @@ function LoginComponent() {
 
         <form onSubmit={handleSumit} className="relative py-3 sm:max-w-xl sm:mx-auto">
             <div
-                className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow rounded-3xl sm:p-10"
+                className="relative px-4 py-10 bg-white mx-8 md:mx-0 shadow-xl rounded-3xl sm:p-10"
             >
                 <div className="max-w-md mx-auto">
                     <div className="flex items-center space-x-5 justify-center">
@@ -109,10 +105,10 @@ function LoginComponent() {
                         </a>
                     </div>
                     <div className="flex justify-center w-full items-center">
-                        <div>
+                        <div className="">
                             <button
                                 onClick={handleGoogleSignIn}
-                                className="flex items-center justify-center py-2 px-20 bg-white hover:bg-gray-200 focus:ring-blue-500 focus:ring-offset-blue-200 text-gray-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
+                                className="flex items-center justify-center py-2 px-10 lg:px-20 bg-white hover:bg-gray-200 focus:ring-blue-500 focus:ring-offset-blue-200 text-gray-700 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg"
                             >
                                 <GoogleSvg width={30} height={30}></GoogleSvg>
                                 <span className="ml-2">Sign in with Google</span>
