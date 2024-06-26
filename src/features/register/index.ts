@@ -1,1 +1,1 @@
-export { default as Register} from './components/SignUp';
+export { default as Register} from './register-structure/SignUp';

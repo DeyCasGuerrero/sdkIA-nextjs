@@ -16,7 +16,7 @@ export default function SloganComponent() {
             <h1 className="text-4xl lg:text-4xl"> SDK IA NEXTJS </h1>
             <p className="lg:text-2xl"> You can find anything in our page</p>
             <div className="mt-4 bg-black rounded-full p-2">
-                <h2 className="font-sans font-black tracking-wider text-white ">Eugen</h2>
+                <h2 className="font-sans font-black tracking-wider text-white ">MIAya</h2>
             </div>
         </motion.div>
     )

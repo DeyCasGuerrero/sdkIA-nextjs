@@ -7,6 +7,7 @@ function ChatPage() {
 
     const { data: session, status } = useSession()
 
+    console.log(session);
     const { handleInputChange, handleSubmit, messages, input } = useChat({
         api: 'api/chat',
     });
@@ -33,7 +34,9 @@ function ChatPage() {
                                                                 />
                                                             </div>
                                                         )}
-                                                        <span className="font-bold text-green-500">{session?.user.name}:</span>
+                                                        <span className="font-bold text-green-500">
+                                                            {session?.user?.name ? session.user.name : session.user.firstname} :
+                                                        </span>
                                                     </div>
                                                     <div>
                                                         {message.content}

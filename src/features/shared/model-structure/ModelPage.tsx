@@ -1,7 +1,13 @@
+'use client';
 import Link from "next/link";
 import { AiFillOpenAI } from "react-icons/ai";
 import styles from '../styles/home.module.css'
+import { useGetDataNew } from "../hooks/useGetNews";
+import { NewType } from "../types/ApiTypes";
 export default function ModelPage() {
+
+    const news: NewType[] = useGetDataNew();
+
     return (
         <>
             <section className={`min-h-screen p-8 md:p-20 relative ${styles.backGround}`}>
@@ -31,27 +37,42 @@ export default function ModelPage() {
             </section>
 
             <section className="bg-[#161719] relative min-h-screen lg:p-20">
-                <div className="flex flex-col w-full lg:flex-row items-center justify-center gap-10 lg:justify-around p-4">
-                    <div className="text-2xl font-semibold uppercase text-white">
-                        Recent MIAya News
-                    </div>
-                    <div className="relative w-full lg:w-auto p-4">
-                        <div className="p-4 w-full lg:w-[20rem] border-t-2 border-gray-300 text-white">
-                            <div className="flex items-center space-x-10">
-                                <h2 className="bg-gray-600 px-4 rounded-2xl">Ai</h2>
-                                <h2 className="bg-gray-600 px-4 rounded-2xl">Model</h2>
-                            </div>
-                            wa
-                        </div>
-                        <div className="p-4 w-full lg:w-[20rem] border-t-2 border-gray-300 text-white">
-                            <div className="flex items-center space-x-10">
-                                <h2 className="bg-gray-600 px-4 rounded-2xl">Ai</h2>
-                                <h2 className="bg-gray-600 px-4 rounded-2xl">Model</h2>
-                            </div>
-                            wa
-                        </div>
-                    </div>
+                <div className="text-2xl font-semibold uppercase text-white">
+                    Recent MIAya News
                 </div>
+
+                {news.length > 0 ? (
+                    <>
+                        {news.map(newItem => (
+                            <div key={newItem.id_news} className="flex flex-col w-full lg:flex-row items-center justify-center gap-10 lg:justify-around p-4">
+                                <div className="relative w-full lg:w-auto p-4">
+                                    <div className="p-4 w-full lg:w-[20rem] border-t-2 border-gray-300 text-white">
+                                        <div className="flex items-center space-x-10">
+                                            <h2 className="bg-gray-600 px-4 rounded-2xl">Ai</h2>
+                                            <h2 className="bg-gray-600 px-4 rounded-2xl">Model</h2>
+                                        </div>
+                                        <div className="space-y-4">
+                                            <h3 className="text-xl font-semibold mt-2">{newItem.titular}</h3>
+                                            <p className="mt-2">{newItem.contenido}</p>
+                                            <div>
+                                                <Link href={newItem.link} className="bg-green-500 px-4 py-2 rounded-2xl">Read more</Link>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        ))}
+                    </>
+
+                ) : (
+                    <div className="mt-10">
+                        <h1 className="text-4xl text-red-500"> NO HAY AÚN NINGUNA NUEVA NOTICIA O NECESITAS CREAR 
+                            UNA CUENTA SIN USAR UN PROVERDOR
+                        </h1>
+                    </div>
+                )}
+
             </section>
 
 
